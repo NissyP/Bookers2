@@ -12,7 +12,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book..page(params[:page]).reverse_order
+    @books = Book.page(params[:page]).reverse_order
   end
 
   def show
