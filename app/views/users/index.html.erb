@@ -9,7 +9,11 @@
             <tr><td>introduction</td><td class="profile-name"><%= @user.introduction %></td></tr>
             <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
             <% if @user.id == current_user.id %>
-              <p><%= link_to edit_user_path(@user), class: "btn btn-outline-dark btn-block" do %><i class="fa fa-user" aria-hidden="true"></i><% end %></p>
+              <p>
+                <%= link_to edit_user_path(@user), class: "btn btn-outline-dark btn-block" do %>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <% end %>
+                </p>
             <% end %>
             </table>
             
