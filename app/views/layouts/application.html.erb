@@ -21,32 +21,45 @@
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
               <li>
-              <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link' %>
+                <%= link_to user_path(current_user.id), class: 'nav-link' do %>
+                <i class="fa fa-home" aria-hidden="true"></i>Home
+                <% end %>
               </li>
               <li>
-                <%= link_to 'Home', root_path, class: 'nav-link' %>
+                <%= link_to users_path, class: 'nav-link' do %>
+                <i class="fa fa-users" aria-hidden="true"></i>Users
+                <% end %>
               </li>
               <li>
-                <%= link_to 'Users', root_path, class: 'nav-link' %>
+                <%= link_to books_path, class: 'nav-link' do %>
+                <i class="fa fa-book" aria-hidden="true"></i>Books
+                <% end %>
               </li>
               <li>
-                <%= link_to 'Books', books_path, class: 'nav-link' %>
-              </li>
-              <li>
-                <%= link_to "logout", destroy_user_session_path, method: :delete, class: 'nav-link' %>
+                <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+                <i class="fa fa-sign-out" aria-hidden="true"></i>logout
+                <% end %>
               </li>
             <% else %>
               <li>
-                <%= link_to 'Home', root_path, class: 'nav-link' %>
+                <%= link_to root_path, class: 'nav-link' do %>
+                <i class="fa fa-home" aria-hidden="true"></i>Home
+                <% end %>
               </li>
               <li>
-                <%= link_to 'About', root_path, class: 'nav-link' %>
+                <%= link_to about_path, class: 'nav-link' do %>
+                <i class="fa fa-link" aria-hidden="true"></i>About
+                <% end %>
               </li>
               <li>
-                <%= link_to "sign up", new_user_registration_path, class: 'nav-link' %>
+                <%= link_to new_user_registration_path, class: 'nav-link' do %>
+                <i class="fa fa-user-plus" aria-hidden="true"></i>sign up
+                <% end %>
               </li>
               <li>
-                <%= link_to "login", new_user_session_path, class: 'nav-link' %>
+                <%= link_to new_user_session_path, class: 'nav-link' do %>
+                <i class="fa fa-sign-in" aria-hidden="true"></i>login
+                <% end %>
               </li>
             <% end %>
             </ul>
@@ -55,7 +68,10 @@
       </nav>
     </header>
     
-    <main class="mb-auto">
+    <main>
+     <% flash.each do |key, value| %>
+       <%= content_tag(:div, value, class: "#{key}") %>
+     <% end %>
     <%= yield %>
     </main>
     

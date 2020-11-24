@@ -8,10 +8,10 @@
             <tr><td>name</td><td class="profile-name"><%= @user.name %></td></tr>
             <tr><td>introduction</td><td class="profile-name"><%= @user.introduction %></td></tr>
             <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-            </table>
             <% if @user.id == current_user.id %>
-              <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-outline-dark" %></p>
+              <p><%= link_to edit_user_path(@user), class: "btn btn-outline-dark btn-block" do %><i class="fa fa-user" aria-hidden="true"></i><% end %></p>
             <% end %>
+            </table>
             
             <h1>New book</h1>
             <% if @book.errors.any? %>
@@ -31,17 +31,25 @@
           </div>
         </div>
     <div class="col-lg-8">
-    <h2>Book detail</h2>
+    <h2>Users</h2>
     <table class="table">
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th></th>
+        </tr>
+      </thead>
+    <% @users.each do |user| %>
       <tbody>
-        <td><%= link_to user_path(@user.id) do %><%= attachment_image_tag @book.user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %><% end %><p><%= link_to user_path(@user.id) do %><%= @user.name %><% end %></p></td>
-        <td><%= link_to book_path(@book.id) do %><%= @book.title %><% end %></td>
-        <td><%= @book.body %></td>
-        <td><%= link_to "編集", edit_book_path(@book) %></td>
-        <td><%= link_to "削除", book_path(@book), method: :delete %></td>
+        <td><%= attachment_image_tag @book.user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %></td>
+        <td><%= user.name %></td>
+        <td><%= link_to user_path(@user.id) do %>show<% end %></td>
       </tbody>
+    <% end %>
     </table>
     </div>
     
   </div>
 </div>
+<%= paginate @users %>
